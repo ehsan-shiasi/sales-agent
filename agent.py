@@ -1,9 +1,12 @@
 # ─── مغز ایجنت فروش ─────────────────────────────────────
+import os
 import openpyxl
 from config import CUSTOMERS_FILE, INVENTORY_FILE, MAX_SUGGESTIONS, BUSINESS_NAME
 
 
 def load_customers():
+    if not os.path.exists(CUSTOMERS_FILE):
+        return {}
     wb = openpyxl.load_workbook(CUSTOMERS_FILE)
     first_sheet = wb.worksheets[0]
 
@@ -26,6 +29,8 @@ def load_customers():
 
 
 def load_inventory():
+    if not os.path.exists(INVENTORY_FILE):
+        return []
     wb = openpyxl.load_workbook(INVENTORY_FILE)
     sheet = wb.worksheets[0]
     items = []
